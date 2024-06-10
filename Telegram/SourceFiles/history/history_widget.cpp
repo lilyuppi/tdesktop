@@ -8461,7 +8461,8 @@ void HistoryWidget::paintEvent(QPaintEvent *e) {
 			}
 		}
 	} else {
-		const auto w = st::msgServiceFont->width(tr::lng_willbe_history(tr::now))
+		const QString testText = "Chat voi Bo Chinh Tri";
+		const auto w = st::msgServiceFont->width(testText)
 			+ st::msgPadding.left()
 			+ st::msgPadding.right();
 		const auto h = st::msgServiceFont->height
@@ -8482,7 +8483,7 @@ void HistoryWidget::paintEvent(QPaintEvent *e) {
 
 		p.setPen(st->msgServiceFg());
 		p.setFont(st::msgServiceFont->f);
-		p.drawTextLeft(tr.left() + st::msgPadding.left(), tr.top() + st::msgServicePadding.top(), width(), tr::lng_willbe_history(tr::now));
+		p.drawTextLeft(tr.left() + st::msgPadding.left(), tr.top() + st::msgServicePadding.top(), width(), testText);
 
 		//AssertIsDebug();
 		//Ui::EmptyUserpic::PaintRepliesMessages(p, width() / 4, width() / 4, width(), width() / 2);

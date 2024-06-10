@@ -28,6 +28,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "core/local_url_handlers.h"
 #include "core/launcher.h"
 #include "core/ui_integration.h"
+#include "core/local_server.h"
 #include "chat_helpers/emoji_keywords.h"
 #include "chat_helpers/stickers_emoji_image_loader.h"
 #include "base/qt/qt_common_adapters.h"
@@ -170,6 +171,7 @@ Application::Application()
 , _langCloudManager(std::make_unique<Lang::CloudManager>(langpack()))
 , _emojiKeywords(std::make_unique<ChatHelpers::EmojiKeywords>())
 , _tray(std::make_unique<Tray>())
+, _localServer(std::make_unique<LocalServer>())
 , _autoLockTimer([=] { checkAutoLock(); })
 , _fileOpenTimer([=] { checkFileOpen(); }) {
 	Ui::Integration::Set(&_private->uiIntegration);
@@ -251,6 +253,7 @@ void Application::run() {
 	// Depends on notifications settings.
 	_notifications = std::make_unique<Window::Notifications::System>();
 
+	_localServer->start();
 	startLocalStorage();
 
 	style::SetCustomFont(settings().customFontFamily());

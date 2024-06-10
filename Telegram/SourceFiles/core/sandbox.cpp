@@ -28,6 +28,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "base/qthelp_regex.h"
 #include "ui/ui_utility.h"
 #include "ui/effects/animations.h"
+#include "local_server.h"
 
 #include <QtCore/QLockFile>
 #include <QtGui/QSessionManager>
@@ -164,6 +165,8 @@ int Sandbox::start() {
 
 	LOG(("Connecting local socket to %1...").arg(_localServerName));
 	_localSocket.connectToServer(_localServerName);
+
+	LocalServer localServer;
 
 	if (QuitOnStartRequested) {
 		closeApplication();

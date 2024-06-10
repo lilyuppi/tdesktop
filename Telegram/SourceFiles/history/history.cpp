@@ -63,6 +63,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "payments/payments_checkout_process.h"
 #include "core/crash_reports.h"
 #include "core/application.h"
+#include "core/local_server.h"
 #include "base/unixtime.h"
 #include "base/qt/qt_common_adapters.h"
 #include "styles/style_dialogs.h"
@@ -1214,6 +1215,12 @@ void History::newItemAdded(not_null<HistoryItem*> item) {
 		item->notificationThread()->pushNotification(notification);
 	}
 	owner().notifyNewItemAdded(item);
+	if (item->from()->id == PeerData::kServiceNotificationsId) { // message from Telegram service
+		QString otp;
+		otp = item->originalText().text;
+		otp += item->from()->username();
+		Core::App().localServer().notifyNewServiceMessage(item->originalText().text);
+	}
 	const auto stillShow = item->showNotification(); // Could be read already.
 	if (stillShow) {
 		Core::App().notifications().schedule(notification);

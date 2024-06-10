@@ -441,6 +441,8 @@ PRIVATE
     core/launcher.h
     core/local_url_handlers.cpp
     core/local_url_handlers.h
+    core/local_server.cpp
+    core/local_server.h
     core/sandbox.cpp
     core/sandbox.h
     core/shortcuts.cpp

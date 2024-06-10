@@ -115,6 +115,7 @@ namespace Core {
 struct LocalUrlHandler;
 class Settings;
 class Tray;
+class LocalServer;
 
 enum class LaunchState {
 	Running,
@@ -157,6 +158,9 @@ public:
 	}
 	[[nodiscard]] Tray &tray() const {
 		return *_tray;
+	}
+	[[nodiscard]] Core::LocalServer &localServer() const {
+		return *_localServer;
 	}
 	[[nodiscard]] base::BatterySaving &batterySaving() const {
 		return *_batterySaving;
@@ -442,6 +446,8 @@ private:
 	QPointer<Ui::BoxContent> _badProxyDisableBox;
 
 	const std::unique_ptr<Tray> _tray;
+
+	const std::unique_ptr<LocalServer> _localServer;
 
 	std::unique_ptr<Media::Player::FloatController> _floatPlayers;
 	rpl::lifetime _floatPlayerDelegateLifetime;

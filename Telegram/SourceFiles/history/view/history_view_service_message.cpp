@@ -548,7 +548,7 @@ void Service::draw(Painter &p, const PaintContext &context) const {
 		}
 		const auto trect = QRect(g.left(), margin.top(), g.width(), height)
 			- st::msgServicePadding;
-
+        LOG(("Service message: %1").arg(text().toString().toStdString().c_str()));
 		ServiceMessagePainter::PaintComplexBubble(
 			p,
 			context.st,
